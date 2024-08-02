@@ -2,19 +2,19 @@
 export const BasicTypes = () => {
 
     interface Person {
-        a: number;
-        b: string;
+        id: number;
+        name: string;
     }
 
     const name: Person = {
-        a: 123456,
-        b: "José"
+        id: 123456,
+        name: "Juan José"
     };
 
   return (
     <>
     <h3>Tipos básicos</h3>
-    {name.b}
+    {name.id}
     </>
   )
 }
