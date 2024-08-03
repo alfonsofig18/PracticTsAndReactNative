@@ -13,9 +13,8 @@ export const BasicTypes = () => {
 
     const age: number = 3;
     const isActive: boolean = true;
-    const name = ['Alfonso', 'José', 'Figueroa', 88, true];
+    const name: any = ['Alfonso', 'José', 'Figueroa', 88, true];
     const powers: string[] = ['Fuerza', 'Volar', 'Levitar']
-
 
     return (
         <>
@@ -23,7 +22,7 @@ export const BasicTypes = () => {
             <h3>Objetos</h3>
             <span style={{ color: 'red' }}>Identificación: {person.id}</span>
             <br />
-            <span style={{ color: 'red' }}>Nombre: {person.name}</span>
+            <span style={{ color: 'red' }}>Nombre: {name.join(' | ')}</span>
         </>
     )
 }
