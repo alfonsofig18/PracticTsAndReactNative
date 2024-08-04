@@ -1,10 +1,11 @@
 
-const ObjectLiterals = () => {
+export const ObjectLiterals = () => {
     interface Person {
         nombre: string;
         apellido: string;
         age: number;
         address: Address;
+        isAlive?: boolean;
     }
 
     interface Address {
@@ -16,6 +17,7 @@ const ObjectLiterals = () => {
         nombre: 'Alfonso',
         age: 16,
         apellido: "De Lannoy",
+        isAlive: true,
         address: {
             country: 'Canadá',
             houseNo: 0
@@ -39,4 +41,3 @@ const ObjectLiterals = () => {
     )
 }
 
-export default ObjectLiterals
