@@ -1,19 +1,11 @@
-import React, { useState } from 'react'
+import { useCounter } from '../hooks/useCounter'
 
-const Counter = () => {
-    const [counter, setCounter] = useState<number>(10);
-    const increaseBy = (value: number) => {
-        setCounter(counter + value);
-    }
-    const decreaseBy = (value: number) => {
-        if (counter > 0) {
-            setCounter(counter - value);
-        }
-    }
+const CounterWidhHook = () => {
+    const { counter, isLimited, increaseBy, decreaseBy } = useCounter({ initialValue: 5 });
     return (
         <>
             <h3>Contador: {counter}</h3>
-            {counter < 0 ? <h4>No se puede</h4> : undefined}
+            {isLimited === false ? <h4>No se puede</h4> : undefined}
             <div>
                 <button onClick={() => decreaseBy(1)}>-1</button>
                 &nbsp;
@@ -23,4 +15,4 @@ const Counter = () => {
     )
 }
 
-export default Counter
+export default CounterWidhHook;
