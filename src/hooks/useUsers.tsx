@@ -6,13 +6,13 @@ interface Props {
     allUsers: User[];
 }
 
-const useUsers = ({ numPage, allUsers }: Props) => {
+const useUsers = ({ numPage = 1, allUsers }: Props) => {
     const [users, setUsers] = useState<User[]>(allUsers);
     const currentPageRef = useRef<number>(numPage);
 
-
-
-    return
+    return {
+        users,
+    }
 }
 
 export default useUsers
