@@ -1,6 +1,8 @@
+import useUsers from "../hooks/useUsers";
+import { User } from "../interfaces";
 
 export const UsersPage = () => {
-
+    const { users, nextPage, prevPage, btnNext, btnPrev } = useUsers()
     return (
         <>
             <h3>Usuarios:</h3>
@@ -19,9 +21,9 @@ export const UsersPage = () => {
                 </tbody>
             </table>
             <div>
-                <button onClick={prevPage}>Prev</button>
+                <button ref={btnPrev} onClick={prevPage}>Prev</button>
                 &nbsp;
-                <button onClick={nextPage}>Next</button>
+                <button ref={btnNext} onClick={nextPage}>Next</button>
             </div>
         </>
     )

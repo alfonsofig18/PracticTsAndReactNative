@@ -12,6 +12,8 @@ const loadUsers = async (page: number = 1): Promise<User[]> => {
                 page: page
             }
         });
+        console.log(data);
+        
         return data.data;
     } catch (error) {
         console.error(error);
@@ -22,34 +24,93 @@ const loadUsers = async (page: number = 1): Promise<User[]> => {
 const useUsers = () => {
     const [users, setUsers] = useState<User[]>([]);
     const currentPageRef = useRef<number>(1);
+    const btnNext = useRef<HTMLButtonElement>(null);
+    const btnPrev = useRef<HTMLButtonElement>(null);
 
     useEffect(() => {
         loadUsers(currentPageRef.current).then((usuarios) => setUsers(usuarios));
         // Tambien sería
         // loadUsers().then(setUsers);
-    }, [])
+        if (btnPrev.current) {
+            btnPrev.current.disabled = true;
+        }
+    }, []);
 
     const nextPage = async () => {
+
         currentPageRef.current++;
         const users: User[] = await loadUsers(currentPageRef.current);
         if (users.length > 0) {
             setUsers(users);
         } else {
             currentPageRef.current--;
+            if (btnNext.current) {
+                btnNext.current.disabled = true;
+            }
         }
-    }
+        if (btnPrev.current) {
+            btnPrev.current.disabled = false;
+        }
+    };
 
     const prevPage = async () => {
-        if (currentPageRef.current < 1) return;
-
+        if (currentPageRef.current < 1) {
+            if (btnPrev.current) {
+                btnPrev.current.disabled = true;
+            }
+            return;
+        }
         currentPageRef.current--;
+        if (btnNext.current) {
+            btnNext.current.disabled = false;
+        }
         const users: User[] = await loadUsers(currentPageRef.current);
         setUsers(users);
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // const nextPage = async () => {
+
+    //     currentPageRef.current++;
+    //     const users: User[] = await loadUsers(currentPageRef.current);
+    //     if (users.length > 0) {
+    //         setUsers(users);
+    //     } else {
+    //         currentPageRef.current--;
+    //         return;
+    //     }
+    // }
+
+    // const prevPage = async () => {
+
+    //     if (currentPageRef.current < 1) {
+    //         return;
+    //     };
+
+    //     currentPageRef.current--;
+    //     const users: User[] = await loadUsers(currentPageRef.current);
+    //     setUsers(users);
+    // }
+
     return {
         //Properties
         users,
+        btnNext,
+        btnPrev,
 
         //Methods
         nextPage,
