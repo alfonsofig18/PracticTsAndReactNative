@@ -13,7 +13,7 @@ const loadUsers = async (page: number = 1): Promise<User[]> => {
             }
         });
         console.log(data);
-        
+
         return data.data;
     } catch (error) {
         console.error(error);
@@ -54,18 +54,20 @@ const useUsers = () => {
     };
 
     const prevPage = async () => {
-        if (currentPageRef.current < 1) {
+        currentPageRef.current--;
+        if (currentPageRef.current <= 1) {
+            console.log(currentPageRef.current);
             if (btnPrev.current) {
                 btnPrev.current.disabled = true;
             }
-            return;
+        } else {
+            if (btnNext.current) {
+                btnNext.current.disabled = false;
+            }
+            const users: User[] = await loadUsers(currentPageRef.current);
+            setUsers(users);
         }
-        currentPageRef.current--;
-        if (btnNext.current) {
-            btnNext.current.disabled = false;
-        }
-        const users: User[] = await loadUsers(currentPageRef.current);
-        setUsers(users);
+
     }
 
 
